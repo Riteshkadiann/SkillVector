@@ -8,43 +8,43 @@
 ---
 
 ## What It Does
-• Extracts skills from resumes and job descriptions using NLP
-• Computes match score via TF-IDF + cosine similarity
-• Ranks missing skills using weighted frequency scoring
-• Generates a prioritized learning roadmap
-• Recalculates match score as progress updates
+- Extracts skills from resumes and job descriptions using NLP
+- Computes match score via TF-IDF + cosine similarity
+- Ranks missing skills using weighted frequency scoring
+- Generates a prioritized learning roadmap
+- Recalculates match score as progress updates
 
 ---
 
 ## Architecture
-• Backend: FastAPI
-• NLP: spaCy
-• ML: scikit-learn (TF-IDF, cosine similarity)
-• Frontend: React
-• DB: PostgreSQL (optional)
+- Backend: FastAPI
+- NLP: spaCy
+- ML: scikit-learn (TF-IDF, cosine similarity)
+- Frontend: React
+- DB: PostgreSQL (optional)
 
 ---
 
 ## Why It’s Different
-Not a chatbot.
-Not prompt engineering.
-A deterministic, algorithm-driven decision engine.
+- Not a chatbot.
+- Not prompt engineering.
+- A deterministic, algorithm-driven decision engine.
 
 ---
 
 ## Quick Start
 ### Backend:
-cd backend
-pip install -r requirements.txt
-python -m spacy download en_core_web_sm
-uvicorn main:app --reload --port 8010
+- cd backend
+- pip install -r requirements.txt
+- python -m spacy download en_core_web_sm
+- uvicorn main:app --reload --port 8010
 
 ---
 
 ### Frontend:
-cd frontend
-npm install
-npm start
+- cd frontend
+- npm install
+- npm start
 
 ---
 
