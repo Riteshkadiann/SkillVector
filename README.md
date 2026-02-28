@@ -40,4 +40,3 @@ npm start
 Backend: http://localhost:8010
 
 Frontend: http://localhost:3000
-"# SkillVector" 
