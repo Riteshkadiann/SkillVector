@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:8010/api';
+const BASE_URL = 'https://skillvector-5qgo.onrender.com/api';
 
 export const uploadResumePDF = async (userId, file) => {
   const formData = new FormData();
