@@ -2,8 +2,8 @@
 
 > AI-powered career intelligence engine that transforms resumes and job descriptions into quantified skill gap analysis and structured learning roadmaps.
 
-🚀 Live Demo: [Coming Soon]  
-📄 API Docs: `/docs`
+🚀 Live Demo: `https://skillvector-y1r1.onrender.com/`  
+📄 API Docs: `https://skillvector-5qgo.onrender.com/docs`
 
 ---
 
