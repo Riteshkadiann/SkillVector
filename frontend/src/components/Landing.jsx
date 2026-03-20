@@ -1,4 +1,5 @@
 import useCountUp from '../hooks/useCountUp';
+import CreatorSignature from './CreatorSignature';
 import { t } from '../design';
 
 // ─── Single animated stat cell ────────────────────────────────────────────────
@@ -40,8 +41,8 @@ function StatCell({ num, label, sub, delay, isLast }) {
 export default function Landing({ onStart }) {
   const stats = [
     { num: '70%',   label: 'Average match accuracy',  sub: 'Across 10k+ resume analyses'    },
-    { num: '60',    label: 'Day structured roadmap',   sub: 'Week-by-week skill building'     },
-    { num: '500+',  label: 'Skills tracked & mapped',  sub: 'Across every major industry'     },
+    { num: '60 Days',    label: 'Structured Learning Roadmap',   sub: 'Week-by-week execution'     },
+    { num: '500+ Skills',  label: 'Tracked across industries',  sub: 'From tech to marketing'     },
     { num: '<1 min', label: 'To your full analysis',    sub: 'Resume to roadmap, instantly'    },
   ];
 
@@ -49,22 +50,22 @@ export default function Landing({ onStart }) {
     {
       icon:  '⬡',
       title: 'NLP Skill Extraction',
-      desc:  'Our engine parses your resume using natural language processing to identify every hard and soft skill you possess — no manual input needed.',
+      desc:  'We parse your resume using NLP to identify your real skill set — no manual input.',
     },
     {
       icon:  '◎',
       title: 'Gap Intelligence',
-      desc:  'We compare your skills against the exact job description and surface what\'s missing, ranked by importance and market frequency.',
+      desc:  'We compare your profile to job requirements and rank missing skills by impact.',
     },
     {
       icon:  '◈',
       title: '60-Day Learning Roadmap',
-      desc:  'Missing skills become a structured week-by-week plan with curated resources and micro-projects to build real proof of work.',
+      desc:  'Get a structured, week-by-week plan with curated resources and real projects.',
     },
     {
       icon:  '◉',
       title: 'Live Score Tracking',
-      desc:  'Mark skills as learned and watch your match score recalculate in real time. Know exactly where you stand at every stage.',
+      desc:  'Track progress in real time as your match score updates instantly.',
     },
   ];
 
@@ -72,31 +73,29 @@ export default function Landing({ onStart }) {
     <div className="fade-in">
 
       {/* ── Hero ── */}
-      <div style={{ textAlign: 'center', padding: '64px 0 80px', maxWidth: 680, margin: '0 auto' }}>
+      <div style={{ textAlign: 'center', padding: '80px 0 100px', maxWidth: 720, margin: '0 auto' }}>
         <div className="section-tag">AI Career Intelligence</div>
         <h1 style={{
           fontFamily:    t.serif,
-          fontSize:      'clamp(44px, 6.5vw, 72px)',
+          fontSize:      'clamp(48px, 7vw, 76px)',
           fontWeight:    400,
-          lineHeight:    1.04,
+          lineHeight:    1.08,
           color:         t.text,
-          marginBottom:  22,
-          letterSpacing: '-0.02em',
+          marginBottom:  24,
+          letterSpacing: '-0.025em',
         }}>
           Know precisely<br />
-          <em style={{ fontStyle: 'italic', color: '#555' }}>what to learn next.</em>
+          <em style={{ fontStyle: 'italic', color: '#6b7280', fontWeight: 400 }}>what to learn next.</em>
         </h1>
         <p style={{
-          fontSize:     16,
+          fontSize:     'clamp(15px, 2.2vw, 18px)',
           color:        t.muted,
-          lineHeight:   1.75,
-          fontWeight:   300,
-          maxWidth:     520,
-          margin:       '0 auto 36px',
+          lineHeight:   1.8,
+          fontWeight:   400,
+          maxWidth:     560,
+          margin:       '0 auto 44px',
         }}>
-          SkillVector analyzes your resume against any job description, surfaces your
-          exact skill gaps, and generates a personalized 60-day learning roadmap —
-          in seconds.
+          SkillVector analyzes your resume against real job descriptions, identifies your exact skill gaps, and generates a personalized roadmap to close them — in seconds.
         </p>
 
         <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -118,15 +117,15 @@ export default function Landing({ onStart }) {
       </div>
 
       {/* ── Animated Stats ── */}
-      <div style={{ borderTop: `1px solid ${t.border}`, borderBottom: `1px solid ${t.border}`, marginBottom: 88 }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}>
+      <div style={{ borderTop: `1px solid ${t.border}`, borderBottom: `1px solid ${t.border}`, marginBottom: 100 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))' }}>
           {stats.map((s, i) => (
             <StatCell
               key={i}
               num={s.num}
               label={s.label}
               sub={s.sub}
-              delay={i * 120}
+              delay={i * 100}
               isLast={i === stats.length - 1}
             />
           ))}
@@ -134,44 +133,42 @@ export default function Landing({ onStart }) {
       </div>
 
       {/* ── What SkillVector Does ── */}
-      <div id="how-it-works" style={{ marginBottom: 88, scrollMarginTop: 80 }}>
-        <div style={{ marginBottom: 48, maxWidth: 560 }}>
+      <div id="how-it-works" style={{ marginBottom: 100, scrollMarginTop: 80 }}>
+        <div style={{ marginBottom: 56, maxWidth: 600 }}>
           <div className="section-tag">What We Do</div>
           <h2 style={{
             fontFamily:    t.serif,
-            fontSize:      'clamp(32px, 4vw, 48px)',
+            fontSize:      'clamp(36px, 4.5vw, 52px)',
             fontWeight:    400,
             color:         t.text,
             lineHeight:    1.1,
-            marginBottom:  16,
-            letterSpacing: '-0.01em',
+            marginBottom:  20,
+            letterSpacing: '-0.015em',
           }}>
-            The career intelligence layer<br />you've been missing.
+            The career intelligence<br />layer you've been missing.
           </h2>
-          <p style={{ fontSize: 15, color: t.muted, lineHeight: 1.75, fontWeight: 300 }}>
-            Most job seekers apply blindly — not knowing which skills are costing them
-            the offer. SkillVector makes your gaps visible, quantifies them with a
-            real match score, and tells you exactly what to learn with a structured plan.
+          <p style={{ fontSize: 15, color: t.muted, lineHeight: 1.8, fontWeight: 300 }}>
+            Most job seekers apply blindly — not knowing which skills are costing them the offer. SkillVector makes your gaps visible, quantifies them with a real match score, and tells you exactly what to learn with a structured plan.
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
           {features.map((f, i) => (
-            <div key={i} className="feature-card fade-up">
-              <div style={{ fontSize: 22, marginBottom: 16, color: t.text }}>{f.icon}</div>
-              <div style={{ fontSize: 16, fontWeight: 600, color: t.text, marginBottom: 10 }}>{f.title}</div>
-              <div style={{ fontSize: 13, color: '#777', lineHeight: 1.7, fontWeight: 300 }}>{f.desc}</div>
+            <div key={i} className="feature-card fade-up" style={{ animationDelay: `${i * 70}ms` }}>
+              <div style={{ fontSize: 28, marginBottom: 18, color: t.primary }}>{f.icon}</div>
+              <div style={{ fontSize: 17, fontWeight: 600, color: t.text, marginBottom: 12 }}>{f.title}</div>
+              <div style={{ fontSize: 14, color: '#666', lineHeight: 1.7, fontWeight: 300 }}>{f.desc}</div>
             </div>
           ))}
         </div>
       </div>
 
       {/* ── About Section ── */}
-      <div id="about" style={{ marginBottom: 88, scrollMarginTop: 80 }}>
+      <div id="about" style={{ marginBottom: 100, scrollMarginTop: 80 }}>
         <div style={{
           display:   'grid',
           gridTemplateColumns: '1fr 1fr',
-          gap:       64,
+          gap:       72,
           alignItems: 'center',
           flexWrap:  'wrap',
         }}>
@@ -180,32 +177,32 @@ export default function Landing({ onStart }) {
             <div className="section-tag">About SkillVector</div>
             <h2 style={{
               fontFamily:    t.serif,
-              fontSize:      'clamp(28px, 3.5vw, 42px)',
+              fontSize:      'clamp(32px, 4vw, 48px)',
               fontWeight:    400,
               color:         t.text,
               lineHeight:    1.1,
-              marginBottom:  20,
-              letterSpacing: '-0.01em',
+              marginBottom:  24,
+              letterSpacing: '-0.015em',
             }}>
               Built for serious<br />job seekers.
             </h2>
-            <p style={{ fontSize: 15, color: t.muted, lineHeight: 1.8, fontWeight: 300, marginBottom: 16 }}>
+            <p style={{ fontSize: 15, color: t.muted, lineHeight: 1.8, fontWeight: 300, marginBottom: 18 }}>
               SkillVector was built to solve a real problem — most people don't know why
               they're not getting callbacks. The answer is almost always a skills mismatch
               that nobody told them about.
             </p>
-            <p style={{ fontSize: 15, color: t.muted, lineHeight: 1.8, fontWeight: 300, marginBottom: 28 }}>
+            <p style={{ fontSize: 15, color: t.muted, lineHeight: 1.8, fontWeight: 300, marginBottom: 32 }}>
               We use NLP, TF-IDF vectorization, and cosine similarity scoring — the same
               techniques used in enterprise hiring tools — and put them in your hands for free.
               No fluff, no generic advice. Just your exact gaps and a plan to close them.
             </p>
-            <button className="btn-primary" style={{ padding: '12px 28px' }} onClick={onStart}>
+            <button className="btn-primary" style={{ padding: '14px 32px', fontSize: 14 }} onClick={onStart}>
               Try it now →
             </button>
           </div>
 
           {/* Right — Stack cards */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
             {[
               { icon: '◎', title: 'NLP-powered parsing',    desc: 'spaCy + regex extracts skills from any resume format' },
               { icon: '◈', title: 'TF-IDF match scoring',   desc: 'Cosine similarity gives you a real % fit — not a guess' },
@@ -215,19 +212,27 @@ export default function Landing({ onStart }) {
               <div key={i} style={{
                 display:      'flex',
                 alignItems:   'flex-start',
-                gap:          14,
-                padding:      '16px 20px',
-                border:       `1.5px solid ${t.border}`,
+                gap:          16,
+                padding:      '18px 22px',
+                border:       `1px solid ${t.border}`,
                 borderRadius: 14,
                 background:   '#fff',
-                transition:   'border-color 0.2s',
+                transition:   'all 0.3s cubic-bezier(0.22,1,0.36,1)',
               }}
-                onMouseEnter={e => e.currentTarget.style.borderColor = t.text}
-                onMouseLeave={e => e.currentTarget.style.borderColor = t.border}
+                onMouseEnter={e => {
+                  e.currentTarget.style.borderColor = t.primary;
+                  e.currentTarget.style.background = '#f0f9ff';
+                  e.currentTarget.style.transform = 'translateX(4px)';
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.borderColor = t.border;
+                  e.currentTarget.style.background = '#fff';
+                  e.currentTarget.style.transform = 'translateX(0)';
+                }}
               >
-                <div style={{ fontSize: 18, flexShrink: 0, marginTop: 1, color: t.text }}>{item.icon}</div>
+                <div style={{ fontSize: 20, flexShrink: 0, marginTop: 2, color: t.primary }}>{item.icon}</div>
                 <div>
-                  <div style={{ fontSize: 14, fontWeight: 600, color: t.text, marginBottom: 3 }}>{item.title}</div>
+                  <div style={{ fontSize: 15, fontWeight: 600, color: t.text, marginBottom: 4 }}>{item.title}</div>
                   <div style={{ fontSize: 13, color: t.muted, fontWeight: 300 }}>{item.desc}</div>
                 </div>
               </div>
@@ -239,46 +244,58 @@ export default function Landing({ onStart }) {
       {/* ── CTA Block ── */}
       <div style={{
         textAlign:    'center',
-        padding:      '64px 40px',
-        background:   t.text,
+        padding:      '80px 60px',
+        background:   `linear-gradient(135deg, ${t.darkBg} 0%, #1e293b 100%)`,
         borderRadius: 24,
         marginBottom: 40,
+        boxShadow:    '0 20px 40px rgba(0, 0, 0, 0.12)',
       }}>
         <div style={{
           fontFamily:    t.serif,
-          fontSize:      'clamp(28px, 4vw, 46px)',
+          fontSize:      'clamp(32px, 5vw, 48px)',
           fontWeight:    400,
-          color:         '#f0ece3',
-          marginBottom:  14,
+          color:         '#f8fafc',
+          marginBottom:  16,
           lineHeight:    1.1,
-          letterSpacing: '-0.01em',
+          letterSpacing: '-0.015em',
         }}>
           Ready to close the gap?
         </div>
-        <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)', marginBottom: 28, fontWeight: 300 }}>
-          Upload your resume and get your full analysis in seconds.
+        <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.6)', marginBottom: 32, fontWeight: 300, maxWidth: 600, margin: '0 auto 32px' }}>
+          Upload your resume and get your full analysis in seconds. Start your transformation today.
         </p>
         <button
           onClick={onStart}
           style={{
             display:     'inline-flex',
-            padding:     '13px 30px',
-            background:  '#f0ece3',
-            color:       t.text,
+            padding:     '14px 36px',
+            background:  '#fff',
+            color:       t.darkBg,
             border:      'none',
-            borderRadius: 100,
+            borderRadius: 12,
             fontFamily:  t.sans,
             fontSize:    14,
             fontWeight:  600,
             cursor:      'pointer',
-            transition:  'all 0.2s',
+            transition:  'all 0.3s cubic-bezier(0.22,1,0.36,1)',
+            boxShadow:   '0 8px 24px rgba(0,0,0,0.12)',
           }}
-          onMouseEnter={e => e.currentTarget.style.background = '#fff'}
-          onMouseLeave={e => e.currentTarget.style.background = '#f0ece3'}
+          onMouseEnter={e => {
+            e.currentTarget.style.background = '#f0f9ff';
+            e.currentTarget.style.transform = 'translateY(-2px)';
+            e.currentTarget.style.boxShadow = '0 12px 32px rgba(0,0,0,0.16)';
+          }}
+          onMouseLeave={e => {
+            e.currentTarget.style.background = '#fff';
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.12)';
+          }}
         >
           Get started — it's free →
         </button>
       </div>
+
+      <CreatorSignature />
     </div>
   );
 }

@@ -4,6 +4,11 @@ from api.routes_resume import router as resume_router
 from api.routes_jobs import router as jobs_router
 from api.routes_gap import router as gap_router
 from api.routes_roadmap import router as roadmap_router
+from core.database import init_db
+from models.database_models import *
+
+# Initialize database tables
+init_db()
 
 app = FastAPI(title="SkillVector", version="1.0.0")
 
