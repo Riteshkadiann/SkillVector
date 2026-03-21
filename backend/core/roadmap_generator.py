@@ -363,16 +363,6 @@ def _get_resources(skill: str) -> List[str]:
     return [f"{skill.title()} Official Documentation", "YouTube tutorials", "Coursera or Udemy"]
 
 
-def _get_duration(skill: str) -> int:
-    s = skill.lower().strip()
-    if s in SKILL_DURATION:
-        return SKILL_DURATION[s]
-    cat = SKILL_TO_CATEGORY.get(s, "")
-    if cat in ("cybersecurity", "ml_ai", "system_design", "data_engineering"):
-        return 2
-    return 1
-
-
 def generate_roadmap(priority_skills: List[Dict], weeks: int = 8) -> List[Dict]:
     roadmap = []
     current_week = 1

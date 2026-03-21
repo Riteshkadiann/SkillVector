@@ -26,7 +26,7 @@ use_null_pool = is_production or is_supabase
 
 # Build engine kwargs conditionally
 # NullPool doesn't accept pool_size/max_overflow parameters
-engine_kwargs = {
+engine_kwargs: dict = {
     "echo": os.getenv("DEBUG", "false").lower() == "true",
     "pool_pre_ping": True,
 }
