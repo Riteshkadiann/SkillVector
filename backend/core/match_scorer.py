@@ -18,8 +18,8 @@ def calculate_match_score(user_skills: List[str], job_skills: List[str]) -> floa
     vectorizer = TfidfVectorizer()
     try:
         tfidf_matrix = vectorizer.fit_transform([user_text, job_text])
-        similarity = cosine_similarity(tfidf_matrix[0:1], tfidf_matrix[1:2])
-        score = round(float(similarity[0][0]) * 100, 2)
+        similarity_matrix = cosine_similarity(tfidf_matrix)
+        score = round(float(similarity_matrix[0, 1]) * 100, 2)
         return min(score, 100.0)
     except Exception:
         # Fallback: simple overlap ratio
