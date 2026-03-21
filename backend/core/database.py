@@ -22,27 +22,32 @@ if is_supabase:
 
 # Detect deployment environment: Render has PORT, RENDER_GIT_COMMIT, or hostname checks
 is_production = bool(os.getenv("RENDER") or os.getenv("PORT") or os.getenv("RENDER_GIT_COMMIT"))
+use_null_pool = is_production or is_supabase
 
-# Create SQLAlchemy engine with Supabase-compatible settings
-engine = create_engine(
-    DATABASE_URL,
-    # Use NullPool in production (Render/cloud) to avoid connection pool exhaustion
-    # Each request gets its own connection, released after use
-    poolclass=NullPool if (is_production or is_supabase) else None,
-    # Test connections before using them (prevents stale connections)
-    pool_pre_ping=True,
-    # Fallback pool size for non-NullPool scenarios
-    pool_size=5,
-    max_overflow=10,
-    # Disable echo in production
-    echo=os.getenv("DEBUG", "false").lower() == "true",
-    # Connection parameters for Supabase/PostgreSQL
-    connect_args={
+# Build engine kwargs conditionally
+# NullPool doesn't accept pool_size/max_overflow parameters
+engine_kwargs = {
+    "echo": os.getenv("DEBUG", "false").lower() == "true",
+    "pool_pre_ping": True,
+}
+
+if use_null_pool:
+    engine_kwargs["poolclass"] = NullPool
+else:
+    # Only add pool parameters for non-NullPool scenarios (local development)
+    engine_kwargs["pool_size"] = 5
+    engine_kwargs["max_overflow"] = 10
+
+# Add connection args for Supabase
+if is_supabase:
+    engine_kwargs["connect_args"] = {
         "connect_timeout": 10,
         "keepalives": 1,
         "keepalives_idle": 30,
-    } if is_supabase else {}
-)
+    }
+
+# Create SQLAlchemy engine with Supabase-compatible settings
+engine = create_engine(DATABASE_URL, **engine_kwargs)
 
 # Create session factory
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
