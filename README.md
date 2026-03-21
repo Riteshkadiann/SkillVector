@@ -21,7 +21,7 @@
 - NLP: spaCy
 - ML: scikit-learn (TF-IDF, cosine similarity)
 - Frontend: React
-- DB: SQLite
+- DB: PostgreSQL
 
 ---
 
