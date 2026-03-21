@@ -14,26 +14,34 @@ DATABASE_URL = os.getenv(
 )
 
 # Determine if using Supabase (check for sslmode in URL or add it)
-if "supabase.co" in DATABASE_URL:
+is_supabase = "supabase.co" in DATABASE_URL
+if is_supabase:
     # Supabase requires SSL - add it if not already present
     if "sslmode=" not in DATABASE_URL:
         DATABASE_URL = DATABASE_URL + "?sslmode=require"
 
+# Detect deployment environment: Render has PORT, RENDER_GIT_COMMIT, or hostname checks
+is_production = bool(os.getenv("RENDER") or os.getenv("PORT") or os.getenv("RENDER_GIT_COMMIT"))
+
 # Create SQLAlchemy engine with Supabase-compatible settings
 engine = create_engine(
     DATABASE_URL,
-    # Use NullPool on Render to avoid connection timeouts
-    poolclass=NullPool if os.getenv("RENDER") else None,
-    # Test connections before using them
+    # Use NullPool in production (Render/cloud) to avoid connection pool exhaustion
+    # Each request gets its own connection, released after use
+    poolclass=NullPool if (is_production or is_supabase) else None,
+    # Test connections before using them (prevents stale connections)
     pool_pre_ping=True,
+    # Fallback pool size for non-NullPool scenarios
+    pool_size=5,
+    max_overflow=10,
     # Disable echo in production
     echo=os.getenv("DEBUG", "false").lower() == "true",
-    # Connection parameters for Supabase
+    # Connection parameters for Supabase/PostgreSQL
     connect_args={
         "connect_timeout": 10,
         "keepalives": 1,
         "keepalives_idle": 30,
-    } if "supabase.co" in DATABASE_URL else {}
+    } if is_supabase else {}
 )
 
 # Create session factory
@@ -58,6 +66,8 @@ def init_db():
         Base.metadata.create_all(bind=engine)
         print("✅ Database tables created successfully")
     except Exception as e:
-        print(f"⚠️  Database initialization skipped: {e}")
-        print("   (This is OK for local development. Database will be created on first request.)")
+        import traceback
+        print(f"⚠️  Database initialization warning: {str(e)}")
+        print(f"   Full traceback: {traceback.format_exc()}")
+        print("   (App can still run with in-memory storage for resume/job data)")
         # Don't raise - allow app to start anyway
