@@ -1,6 +1,7 @@
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, event
 from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.pool import NullPool
 import os
 from dotenv import load_dotenv
 
@@ -12,11 +13,25 @@ DATABASE_URL = os.getenv(
     "postgresql://postgres:postgres@localhost:5432/skillvector"
 )
 
-# Create SQLAlchemy engine
+# Determine if using Supabase (check for sslmode in URL or add it)
+if "supabase.co" in DATABASE_URL:
+    # Supabase requires SSL - add it if not already present
+    if "sslmode=" not in DATABASE_URL:
+        DATABASE_URL = DATABASE_URL + "?sslmode=require"
+
+# Create SQLAlchemy engine with Supabase-compatible settings
 engine = create_engine(
     DATABASE_URL,
+    # Use NullPool on Render to avoid connection timeouts
+    poolclass=NullPool if os.getenv("RENDER") else None,
+    # Test connections before using them
     pool_pre_ping=True,
-    echo=False
+    # Disable echo in production
+    echo=os.getenv("DEBUG", "false").lower() == "true",
+    # Connection parameters
+    connect_args={
+        "connect_timeout": 10,
+    } if "supabase.co" in DATABASE_URL else {}
 )
 
 # Create session factory
@@ -37,4 +52,9 @@ def get_db():
 
 def init_db():
     """Initialize database tables"""
-    Base.metadata.create_all(bind=engine)
+    try:
+        Base.metadata.create_all(bind=engine)
+        print("✅ Database tables created successfully")
+    except Exception as e:
+        print(f"⚠️  Database initialization error: {e}")
+        raise
