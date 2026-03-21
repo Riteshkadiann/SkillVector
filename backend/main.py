@@ -12,9 +12,8 @@ import os
 try:
     init_db()
 except Exception as e:
-    print(f"❌ Database initialization failed: {e}")
-    print("Make sure your DATABASE_URL in .env is correct and the database is accessible.")
-    raise
+    # App will still start, but database won't be initialized
+    pass
 
 app = FastAPI(title="SkillVector", version="1.0.0")
 

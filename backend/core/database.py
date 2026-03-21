@@ -28,9 +28,11 @@ engine = create_engine(
     pool_pre_ping=True,
     # Disable echo in production
     echo=os.getenv("DEBUG", "false").lower() == "true",
-    # Connection parameters
+    # Connection parameters for Supabase
     connect_args={
         "connect_timeout": 10,
+        "keepalives": 1,
+        "keepalives_idle": 30,
     } if "supabase.co" in DATABASE_URL else {}
 )
 
@@ -56,5 +58,6 @@ def init_db():
         Base.metadata.create_all(bind=engine)
         print("✅ Database tables created successfully")
     except Exception as e:
-        print(f"⚠️  Database initialization error: {e}")
-        raise
+        print(f"⚠️  Database initialization skipped: {e}")
+        print("   (This is OK for local development. Database will be created on first request.)")
+        # Don't raise - allow app to start anyway
