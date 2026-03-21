@@ -28,10 +28,10 @@ async def upload_resume(file: UploadFile = File(...), user_id: str = Form(...)):
         resume = Resume(
             user_id=user_id,
             raw_text=text,
-            skills=parsed.get("skills", {}),
+            skills=parsed.get("skills", []),
             years_experience=parsed.get("years_experience", 0),
             education=parsed.get("education", ""),
-            skill_count=len(parsed.get("skills", {}))
+            skill_count=len(parsed.get("skills", []))
         )
         db.add(resume)
         db.commit()
@@ -59,10 +59,10 @@ async def submit_resume_text(data: ResumeInput):
         resume = Resume(
             user_id=data.user_id,
             raw_text=data.raw_text,
-            skills=parsed.get("skills", {}),
+            skills=parsed.get("skills", []),
             years_experience=parsed.get("years_experience", 0),
             education=parsed.get("education", ""),
-            skill_count=len(parsed.get("skills", {}))
+            skill_count=len(parsed.get("skills", []))
         )
         db.add(resume)
         db.commit()

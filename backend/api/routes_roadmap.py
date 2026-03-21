@@ -65,8 +65,8 @@ def update_progress(user_id: str, data: ProgressUpdate):
         db.add(progress)
         db.commit()
 
-        updated_skills = list(set(list(user_data.skills.keys()) + data.completed_skills))
-        new_score = calculate_match_score(updated_skills, list(job_data.all_skills.keys()))
+        updated_skills = list(set(user_data.skills + data.completed_skills))
+        new_score = calculate_match_score(updated_skills, job_data.all_skills)
 
         return {
             "user_id": user_id,

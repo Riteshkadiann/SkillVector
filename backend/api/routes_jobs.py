@@ -22,10 +22,10 @@ def analyze_job(data: JobInput):
             user_id=data.user_id,
             job_title=data.job_title,
             raw_text=data.job_description,
-            required_skills=result.get("required_skills", {}),
-            preferred_skills=result.get("preferred_skills", {}),
-            all_skills=result.get("all_skills", {}),
-            total_skill_count=len(result.get("all_skills", {}))
+            required_skills=result.get("required_skills", []),
+            preferred_skills=result.get("preferred_skills", []),
+            all_skills=result.get("all_skills", []),
+            total_skill_count=len(result.get("all_skills", []))
         )
         db.add(job)
         db.commit()
