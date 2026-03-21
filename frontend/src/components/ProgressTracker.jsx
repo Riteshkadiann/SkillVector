@@ -87,8 +87,18 @@ export default function ProgressTracker({ userId, skills }) {
         className="btn-primary btn-full"
         onClick={handleSubmit}
         disabled={loading || checked.length === 0}
+        style={{
+          fontSize: 18,
+          padding: '20px 24px',
+          fontWeight: 600,
+          letterSpacing: '0.5px',
+          minHeight: '60px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
       >
-        {loading ? 'Recalculating…' : 'Recalculate My Score →'}
+        {loading ? 'Recalculating…' : 'Recalculate My Score 🎉'}
       </button>
 
       {/* Result */}
