@@ -1,34 +1,41 @@
 # 🧠 SkillVector
 
-> AI-powered career intelligence engine that transforms resumes and job descriptions into quantified skill gap analysis and structured learning roadmaps.
+> AI career intelligence engine that converts resumes + job descriptions into quantified skill gap analysis and actionable learning roadmaps.
 
-🚀 Live Demo: `https://skillvector-y1r1.onrender.com/`  
-📄 API Docs: `https://skillvector-5qgo.onrender.com/docs`
-
----
-
-## What It Does
-- Extracts skills from resumes and job descriptions using NLP
-- Computes match score via TF-IDF + cosine similarity
-- Ranks missing skills using weighted frequency scoring
-- Generates a prioritized learning roadmap
-- Recalculates match score as progress updates
+🚀 Live Demo: `https://skillvector-04vy.onrender.com/`  
+📄 API Docs: `https://skillvector-nwm2.onrender.com/`  
 
 ---
 
-## Architecture
-- Backend: FastAPI
-- NLP: spaCy
-- ML: scikit-learn (TF-IDF, cosine similarity)
-- Frontend: React
-- DB: PostgreSQL
+## ⚡ What It Does
+
+- Parses resumes and job descriptions using NLP  
+- Computes match score via TF-IDF + cosine similarity  
+- Identifies and ranks missing skills using weighted scoring  
+- Generates structured, prioritized learning roadmaps  
+- Dynamically recalculates match score as skills improve  
 
 ---
 
-## Why It’s Different
-- Not a chatbot.
-- Not prompt engineering.
-- A deterministic, algorithm-driven decision engine.
+## 🏗️ Architecture
+
+- **Backend:** FastAPI  
+- **Frontend:** React  
+- **Database:** PostgreSQL (Supabase)  
+- **NLP:** spaCy  
+- **ML:** scikit-learn (TF-IDF, cosine similarity)  
+- **Deployment:** Render  
+
+---
+
+## 🧠 Core Idea
+
+SkillVector is not a chatbot.
+
+It’s a **deterministic decision engine** that:
+- quantifies career gaps  
+- ranks them algorithmically  
+- outputs structured, data-driven guidance  
 
 ---
 
