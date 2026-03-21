@@ -44,7 +44,7 @@ export default function ProgressTracker({ userId, skills }) {
       <div style={{ marginBottom: 28 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
           <span style={{ fontSize: 13, color: t.muted }}>{checked.length} of {skills.length} completed</span>
-          <span style={{ fontSize: 13, fontWeight: 600, color: pct > 0 ? t.green : t.faint }}>{pct}%</span>
+          <span style={{ fontSize: 32, fontWeight: 700, color: pct > 0 ? t.green : t.faint }}>{pct}% 🎉</span>
         </div>
         <div style={{ height: 6, background: '#f0f0f0', borderRadius: 4, overflow: 'hidden' }}>
           <div style={{ width: `${pct}%`, height: '100%', background: t.green, borderRadius: 4, transition: 'width 0.5s ease' }} />
@@ -87,18 +87,8 @@ export default function ProgressTracker({ userId, skills }) {
         className="btn-primary btn-full"
         onClick={handleSubmit}
         disabled={loading || checked.length === 0}
-        style={{
-          fontSize: 18,
-          padding: '20px 24px',
-          fontWeight: 600,
-          letterSpacing: '0.5px',
-          minHeight: '60px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
       >
-        {loading ? 'Recalculating…' : 'Recalculate My Score 🎉'}
+        {loading ? 'Recalculating…' : 'Recalculate My Score →'}
       </button>
 
       {/* Result */}
