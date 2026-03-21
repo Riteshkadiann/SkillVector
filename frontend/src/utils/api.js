@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:8010/api';
+const BASE_URL = `${process.env.REACT_APP_API_URL || 'http://localhost:8010'}/api`;
 
 export const uploadResumePDF = async (userId, file) => {
   const formData = new FormData();
