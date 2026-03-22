@@ -25,6 +25,10 @@ async def upload_resume(file: UploadFile = File(...), user_id: str = Form(...)):
     # Save to database
     db = SessionLocal()
     try:
+        # Delete any old resume for this user
+        db.query(Resume).filter(Resume.user_id == user_id).delete()
+        db.commit()
+        
         resume = Resume(
             user_id=user_id,
             raw_text=text,
@@ -56,6 +60,10 @@ async def submit_resume_text(data: ResumeInput):
     # Save to database
     db = SessionLocal()
     try:
+        # Delete any old resume for this user
+        db.query(Resume).filter(Resume.user_id == data.user_id).delete()
+        db.commit()
+        
         resume = Resume(
             user_id=data.user_id,
             raw_text=data.raw_text,

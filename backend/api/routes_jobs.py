@@ -18,6 +18,10 @@ def analyze_job(data: JobInput):
     # Save to database
     db = SessionLocal()
     try:
+        # Delete any old job description for this user
+        db.query(JobDescription).filter(JobDescription.user_id == data.user_id).delete()
+        db.commit()
+        
         job = JobDescription(
             user_id=data.user_id,
             job_title=data.job_title,
