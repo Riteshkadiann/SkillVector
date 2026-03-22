@@ -1,6 +1,7 @@
 import re
 import io
 import pdfplumber
+from docx import Document
 from utils.skill_taxonomy import ALL_SKILLS
 
 # ─── Stop words — never a skill on their own ─────────────────────────────────
@@ -48,6 +49,25 @@ def extract_text_from_pdf(file_bytes: bytes) -> str:
                     text += page_text + "\n"
     except Exception as e:
         raise ValueError(f"Failed to parse PDF: {str(e)}")
+    return text
+
+
+def extract_text_from_docx(file_bytes: bytes) -> str:
+    """Extract text from a DOCX file."""
+    text = ""
+    try:
+        doc = Document(io.BytesIO(file_bytes))
+        for paragraph in doc.paragraphs:
+            if paragraph.text.strip():
+                text += paragraph.text + "\n"
+        # Also extract text from tables
+        for table in doc.tables:
+            for row in table.rows:
+                for cell in row.cells:
+                    if cell.text.strip():
+                        text += cell.text + "\n"
+    except Exception as e:
+        raise ValueError(f"Failed to parse DOCX: {str(e)}")
     return text
 
 

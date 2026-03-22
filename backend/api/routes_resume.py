@@ -1,6 +1,6 @@
 from fastapi import APIRouter, UploadFile, File, Form, HTTPException
 from sqlalchemy.orm import Session
-from core.resume_parser import extract_text_from_pdf, parse_resume
+from core.resume_parser import extract_text_from_pdf, extract_text_from_docx, parse_resume
 from models.schemas import ResumeInput
 from models.database_models import Resume
 from core.database import SessionLocal
@@ -10,15 +10,22 @@ router = APIRouter()
 
 @router.post("/upload")
 async def upload_resume(file: UploadFile = File(...), user_id: str = Form(...)):
-    """Upload a PDF resume and extract skills."""
-    if not file.filename.endswith(".pdf"):
-        raise HTTPException(status_code=400, detail="Only PDF files are supported")
+    """Upload a PDF or DOCX resume and extract skills."""
+    filename = file.filename.lower()
+    
+    if not (filename.endswith(".pdf") or filename.endswith(".docx")):
+        raise HTTPException(status_code=400, detail="Only PDF and DOCX files are supported")
 
     contents = await file.read()
-    text = extract_text_from_pdf(contents)
+    
+    # Extract text based on file type
+    if filename.endswith(".pdf"):
+        text = extract_text_from_pdf(contents)
+    else:  # .docx
+        text = extract_text_from_docx(contents)
 
     if not text.strip():
-        raise HTTPException(status_code=400, detail="Could not extract text from PDF")
+        raise HTTPException(status_code=400, detail="Could not extract text from file")
 
     parsed = parse_resume(text)
     
